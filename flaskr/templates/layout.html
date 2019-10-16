@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Flaskr</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='mystyle.css')}}">
+</head>
+
+<body>
+    <div class="container">
+        <div class="menu primary">
+            <ul>
+                <li><a href="#">Post It!</a></li>
+                {% if not session.logged_in %}
+                <li><a href="{{ url_for('login')}}">Log in</a></li>
+                {% else %}
+                <li><a href="{{ url_for('logout')}}">Log out</a></li>
+                {% endif%}
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4">
+                <ul>
+                    {% for message in get_flashed_messages() %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% block body %}{% endblock %}
+            </div>
+            <div class="col-4"></div>
+        </div>
+    </div>
+    <div class="footer">
+        &copy; 2019 Post it!. All Rights Reserved
+    </div>
+</body>
+
+</html>

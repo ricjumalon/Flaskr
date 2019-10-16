@@ -1,0 +1,17 @@
+{% extends "layout.html" %} {% block body %}
+<div class="card-title">
+    <h2 class="center">User Login</h2>
+</div>
+<div class="card-body">
+    {% if error %}
+    <p class="danger"><strong>Error: </strong>{{ error }}</p>
+    {% endif %}
+    <form action="{{ url_for('login') }}" method="POST">
+        <label for="">Username:</label><br>
+        <input type="text" class="form-control" name="username">
+        <label for="">Password</label><br>
+        <input type="password" class="form-control" name="password">
+        <button type="submt" class="btn primary form-control">Login</button>
+    </form>
+</div>
+{% endblock %}

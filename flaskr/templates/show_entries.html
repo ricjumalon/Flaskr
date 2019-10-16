@@ -1,0 +1,36 @@
+{% extends 'layout.html' %} {% block body %} {% if session.logged_in %}
+<div class="card">
+    <div class="card-title">
+        <p><strong>Start Posting now</strong></p>
+    </div>
+    <div class="card-body">
+        <form action="{{ url_for('add_entry')}}" method="POST">
+            <label for="">Title</label>
+            <input type="text" class="form-control" name="title">
+            <label for="">Your Post</label>
+            <textarea name="text" class="form-control"></textarea>
+            <button type="submit" class="btn primary form-control">Post it!</button>
+        </form>
+    </div>
+</div>
+{% endif %} {% for entry in entries %}
+<div class="card mt-2">
+    <div class="card-title">
+        <p><strong>{{ entry.title }}</strong></p>
+    </div>
+    <div class="card-body">
+        <p>{{ entry.text|safe }}</p>
+    </div>
+    {% if session.logged_in %}
+    <div class="card-footer right">
+        <a class="btn btn-sm danger" href="/delete/{{ entry.id }}">Delete Post</a>
+    </div>
+    {% endif %}
+</div>
+{% else %}
+<div class="card">
+    <div class="card-title">
+        <em>Unbelievable. No entries here so far</em>
+    </div>
+</div>
+{% endfor %} {% endblock %}
